@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bnwd3iedr3xh6"]
+
+[ext_resource type="Script" uid="uid://b8f03gjyjsnvn" path="res://Scenes/Rooms/lose.gd" id="1_u5fs0"]
+
+[node name="Win" type="Control" unique_id=568347149]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u5fs0")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2076325654]
+layout_mode = 0
+offset_right = 1229.0
+offset_bottom = 764.0
+color = Color(0.2552752, 0.19056442, 0.33937222, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1493142107]
+layout_mode = 0
+offset_right = 1041.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1637000504]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "You Win!"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=98212364]
+layout_mode = 0
+offset_left = 354.0
+offset_top = 260.0
+offset_right = 715.0
+offset_bottom = 497.0
+
+[node name="Return" type="Button" parent="VBoxContainer" unique_id=1655258812]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Return to Start"
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=814526717]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_return_pressed"]

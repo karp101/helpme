@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://cmnc3ql5oloqj"]
+
+[ext_resource type="Script" uid="uid://65it2k3prjpp" path="res://basic_enemy.gd" id="1_8uwsg"]
+[ext_resource type="Texture2D" uid="uid://3n5m5iplsrw2" path="res://Sprites/TempEnemy2.png" id="2_bp1or"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trlyu"]
+size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x7mpe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bp1or")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8uwsg"]
+radius = 0.01
+
+[node name="Chest" type="CharacterBody2D" unique_id=369922696 groups=["Enemy"]]
+collision_layer = 2
+script = ExtResource("1_8uwsg")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=55821150]
+shape = SubResource("RectangleShape2D_trlyu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=696713032]
+position = Vector2(1, -16)
+sprite_frames = SubResource("SpriteFrames_x7mpe")
+
+[node name="Avoidance" type="Area2D" parent="." unique_id=1925382109]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Avoidance" unique_id=328853677]
+shape = SubResource("CircleShape2D_8uwsg")
+
+[node name="Safe" type="Area2D" parent="." unique_id=1988249395]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Safe" unique_id=277147678]
+shape = SubResource("CircleShape2D_8uwsg")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=2056686223]
+
+[node name="Line2D" type="Line2D" parent="." unique_id=759115542]
+visible = false
+points = PackedVector2Array(0, 0, 50, 0)
+closed = true
+width = 3.0
+default_color = Color(0.60493815, 0.13669863, 0.1763626, 1)

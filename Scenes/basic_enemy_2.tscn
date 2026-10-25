@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cn3klvvjxg3pt"]
+
+[ext_resource type="Script" uid="uid://65it2k3prjpp" path="res://basic_enemy.gd" id="1_oguoa"]
+[ext_resource type="Texture2D" uid="uid://3n5m5iplsrw2" path="res://Sprites/TempEnemy2.png" id="2_oguoa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q274q"]
+size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q274q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_oguoa")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cwxyq"]
+radius = 75.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8uy25"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xp834"]
+radius = 500.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwxyq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_083ic"]
+bg_color = Color(0.48271918, 0.10353001, 0.10080955, 1)
+
+[node name="BasicEnemy2" type="CharacterBody2D" unique_id=1038364991]
+collision_layer = 2
+script = ExtResource("1_oguoa")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1733942278]
+shape = SubResource("RectangleShape2D_q274q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1667828368]
+position = Vector2(1, -16)
+sprite_frames = SubResource("SpriteFrames_q274q")
+
+[node name="Avoidance" type="Area2D" parent="." unique_id=1427749539]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Avoidance" unique_id=300555229]
+shape = SubResource("CircleShape2D_cwxyq")
+
+[node name="Safe" type="Area2D" parent="." unique_id=1047475354]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Safe" unique_id=140703648]
+shape = SubResource("CircleShape2D_8uy25")
+
+[node name="Sight" type="Area2D" parent="." unique_id=1174356664]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=623335791]
+shape = SubResource("CircleShape2D_xp834")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1235529002]
+
+[node name="Timer" type="Timer" parent="." unique_id=259098534]
+wait_time = 0.1
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1834971885]
+points = PackedVector2Array(0, 0, 50, 0)
+closed = true
+width = 3.0
+default_color = Color(0.60493815, 0.13669863, 0.1763626, 1)
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1271052833]
+wait_time = 1.5
+
+[node name="HPBar" type="ProgressBar" parent="." unique_id=971625855]
+offset_left = -30.0
+offset_top = 22.0
+offset_right = 34.0
+offset_bottom = 28.0
+theme_override_styles/background = SubResource("StyleBoxFlat_cwxyq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_083ic")
+value = 100.0
+show_percentage = false
+
+[connection signal="body_entered" from="Avoidance" to="." method="_on_avoidance_body_entered"]
+[connection signal="body_exited" from="Avoidance" to="." method="_on_avoidance_body_exited"]
+[connection signal="body_entered" from="Safe" to="." method="_on_safe_body_entered"]
+[connection signal="body_exited" from="Safe" to="." method="_on_safe_body_exited"]
+[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

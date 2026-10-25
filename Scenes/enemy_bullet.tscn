@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cm8dhgfm4i70i"]
+
+[ext_resource type="Script" uid="uid://cagjfboh41w1n" path="res://Scripts/enemy_bullet.gd" id="1_tcvu8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54jiv"]
+size = Vector2(64, 16)
+
+[node name="EnemyBullet" type="Area2D" unique_id=71783055]
+script = ExtResource("1_tcvu8")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=15107958]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -8.0
+offset_right = 31.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.33037886, 0.53298503, 0.27133378, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1779454250]
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="." unique_id=377254583]
+visible = false
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_54jiv")
+
+[node name="Timer" type="Timer" parent="." unique_id=2073504695]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
